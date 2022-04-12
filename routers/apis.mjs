@@ -13,9 +13,9 @@ const router = express.Router()
 
 router.use(express.json())
 
-glob.sync(resolve(base, 'server/api/**/*.js')).forEach(file => {
+glob.sync(resolve(base, 'server/api/**/*.mjs')).forEach(file => {
     const relativepath = relative(join(base, 'server', 'api'), file)
-    const apipath = join(dirname(relativepath), basename(relativepath, '.js'))
+    const apipath = join(dirname(relativepath), basename(relativepath, '.mjs'))
 
     import(url.pathToFileURL(file)).then(importedFile => {
         router.use(`/api/${apipath}`.replace(/\\/g, '/'), importedFile.default)

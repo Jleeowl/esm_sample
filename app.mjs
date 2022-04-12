@@ -5,7 +5,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
 
-import router from './routers/apis.js'
+import router from './routers/apis.mjs'
 
 const app = express()
 

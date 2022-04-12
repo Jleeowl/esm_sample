@@ -1,14 +1,14 @@
 import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 
-import _ from './helpers/loadEnv.js'
+import _ from './helpers/loadEnv.mjs'
 
 import chalk  from 'chalk'
 import { join }  from 'path'
 import http  from 'http'
 import getPort  from 'get-port'
 
-import app from './app.js'
+import app from './app.mjs'
 
 const base = process.cwd()
 
