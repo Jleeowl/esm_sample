@@ -7,7 +7,6 @@ export default (() => {
 
   const envfile = path.join(process.cwd(), 'env', '.env.' + env)
 
-  console.log(envfile)
   if (fs.existsSync(envfile)) {
     dotenv.config({
       path: envfile

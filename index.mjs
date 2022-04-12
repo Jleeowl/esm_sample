@@ -9,6 +9,7 @@ import http  from 'http'
 import getPort  from 'get-port'
 
 import app from './app.mjs'
+import db from './db.mjs'
 
 const base = process.cwd()
 
@@ -29,6 +30,15 @@ export default (async () => {
   const server = http.createServer(app)
 
   await new Promise(resolve => server.listen(process.env.PORT, resolve))
+
+  log()
+  log(chalk.yellow(`Initializing db`))
+  try {
+    await db.authenticate()
+    log(chalk.green(`- DB connection authenticated successfully.`))
+  } catch(err) {
+    log(chalk.red(`- DB connection authentication failed.`))
+  }
 
   log()
   log(`App listening on port ${chalk.blue(process.env.PORT)}`)
