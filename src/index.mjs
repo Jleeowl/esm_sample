@@ -1,7 +1,7 @@
 import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 
-import _ from './helpers/loadEnv.mjs'
+import './helpers/env_loader.mjs'
 
 import chalk  from 'chalk'
 import { join }  from 'path'
