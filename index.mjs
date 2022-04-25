@@ -35,9 +35,9 @@ export default (async () => {
   log(chalk.yellow(`Initializing db`))
   try {
     await db.authenticate()
-    log(chalk.green(`- DB connection authenticated successfully.`))
+    log(chalk.green(`- DB(${process.env.DATABASE}) connection authenticated successfully.`))
   } catch(err) {
-    log(chalk.red(`- DB connection authentication failed.`))
+    log(chalk.red(`- DB(${process.env.DATABASE}) connection authentication failed.`))
   }
 
   log()
