@@ -9,7 +9,7 @@ import http  from 'http'
 import getPort  from 'get-port'
 
 import app from './app.mjs'
-import db from './db.mjs'
+import Database from './database.mjs'
 
 const base = process.cwd()
 
@@ -34,10 +34,12 @@ export default (async () => {
   log()
   log(chalk.yellow(`Initializing db`))
   try {
-    await db.authenticate()
-    log(chalk.green(`- Sequelize ORM (${process.env.DATABASE}) connection authenticated successfully.`))
+    const seqInstance = Database.sequelizeInstance()
+    await seqInstance.authenticate()
+
+    log(chalk.green(`- Sequelize ORM (${process.env.SEQ_DATABASE}) connection authenticated successfully.`))
   } catch(err) {
-    log(chalk.red(`- Sequelize ORM (${process.env.DATABASE}) connection authentication failed.`))
+    log(chalk.red(`- Sequelize ORM (${process.env.SEQ_DATABASE}) connection authentication failed.`))
   }
 
   log()
