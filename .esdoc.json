@@ -3,6 +3,8 @@
     "includes": [".+\\.(m|c)?js(doc|x)?$"],
     "destination": "./docs",
     "plugins": [
-      {"name": "esdoc-standard-plugin"}
+      {
+        "name": "esdoc-standard-plugin"
+      }
     ]
   }

@@ -7,16 +7,22 @@ export default (() => {
     console.log(chalk.yellow('Initializing db'))
 
     if (!db) {
-        db = new Sequelize(
-            `${process.env.DATABASE}`, 
-            `${process.env.DB_USER}`, 
-            `${process.env.DB_PASSWORD}`, 
-            {
-                dialect: 'postgres',
-                dialectOptions: {
-                    
-                }
-            })
+        if (process.env.SEQ_DATABASE && 
+            process.env.SEQ_DB_USER && 
+            process.env.SEQ_DB_PASSWORD) {
+                
+            db = new Sequelize(
+                `${process.env.SEQ_DATABASE}`, 
+                `${process.env.SEQ_DB_USER}`, 
+                `${process.env.SEQ_DB_PASSWORD}`, 
+                {
+                    dialect: 'postgres',
+                    dialectOptions: {
+                        
+                    }
+                })
+        }
+        
     }
 
     return db
