@@ -13,8 +13,7 @@ export class Database {
      */
     constructor() {
         if (process.env.SEQ_DATABASE && 
-            process.env.SEQ_DB_USER && 
-            process.env.SEQ_DB_PASSWORD) {
+            process.env.SEQ_DB_USER) {
                 
                 seqInstance = new Sequelize(
                 `${process.env.SEQ_DATABASE}`, 
