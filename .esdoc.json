@@ -1,6 +1,11 @@
 {
     "source": "./src",
     "includes": [".+\\.(m|c)?js(doc|x)?$"],
+    "excludes": [
+      "\\app.(m|c)?js(doc|x)?$",
+      "\\index.(m|c)?js(doc|x)?$",
+      "\\apis.(m|c)?js(doc|x)?$"
+    ],
     "destination": "./docs",
     "plugins": [
       {

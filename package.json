@@ -6,7 +6,8 @@
   "main": "./src/index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/index.mjs"
+    "start": "nodemon ./src/index.mjs",
+    "docs": "rm -rf ./docs && esdoc"
   },
   "author": "",
   "license": "ISC",
