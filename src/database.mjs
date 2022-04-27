@@ -1,17 +1,15 @@
 import { Sequelize } from 'sequelize'
 import chalk  from 'chalk'
 
-let db
+let seqInstance
 
-export default (() => {
-    console.log(chalk.yellow('Initializing db'))
-
-    if (!db) {
+export class Database {
+    constructor() {
         if (process.env.SEQ_DATABASE && 
             process.env.SEQ_DB_USER && 
             process.env.SEQ_DB_PASSWORD) {
                 
-            db = new Sequelize(
+                seqInstance = new Sequelize(
                 `${process.env.SEQ_DATABASE}`, 
                 `${process.env.SEQ_DB_USER}`, 
                 `${process.env.SEQ_DB_PASSWORD}`, 
@@ -22,8 +20,11 @@ export default (() => {
                     }
                 })
         }
-        
     }
 
-    return db
-})()
+    sequelizeInstance() {
+        return seqInstance
+    }
+}
+
+export default new Database()

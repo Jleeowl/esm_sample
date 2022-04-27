@@ -13,8 +13,8 @@ const router = express.Router()
 
 router.use(express.json())
 
-glob.sync(resolve(base, 'server/api/**/*.mjs')).forEach(file => {
-    const relativepath = relative(join(base, 'server', 'api'), file)
+glob.sync(resolve(base, 'src', 'server/api/**/*.mjs')).forEach(file => {
+    const relativepath = relative(join(base, 'src', 'server', 'api'), file)
     const apipath = join(dirname(relativepath), basename(relativepath, '.mjs'))
 
     import(url.pathToFileURL(file)).then(importedFile => {

@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.mjs",
+  "main": "./src/index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.mjs"
+    "start": "nodemon ./src/index.mjs"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +26,8 @@
     "sequelize": "^6.18.0"
   },
   "devDependencies": {
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "nodemon": "^2.0.15"
   }
 }
