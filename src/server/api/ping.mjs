@@ -21,12 +21,18 @@ class Ping {
   constructor() {
     // Routes are defined in the constructor
 
-    /**
-     * @name get/ping
-     * @function
-     * @inner
-     * @param {string} path - Express path
-     * @param {callback} middleware - Express middleware.
+    /** 
+     * @api {get} /ping Ping the server
+     * @apiName GetPing
+     * @apiGroup Ping
+     * 
+     * @apiSuccess {String} data Ping message from endpoint
+     * 
+     * @apiSuccessExample Success-Response:
+     *    HTTP/1.1 200 OK
+     *    {
+     *      "data": "pong"
+     *    }
      */
     router.get('/', async (req, res, next) => {
       res.json({

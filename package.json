@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./src/index.mjs",
-    "docs": "rm -rf ./docs && esdoc"
+    "esdoc": "rm -rf ./docs && esdoc",
+    "apidoc": "rm -rf ./apidocs && apidoc -i ./src -o ./apidocs"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +28,7 @@
     "sequelize": "^6.18.0"
   },
   "devDependencies": {
+    "apidoc": "^0.51.1",
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
     "nodemon": "^2.0.15"
