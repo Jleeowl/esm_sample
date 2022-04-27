@@ -3,9 +3,13 @@ import path from 'path'
 import fs from 'fs'
 
 /**
- * This helper class generates process environment variables from .env files from the pre-defined paths.
+ * This helper class generates process environment variables from .env files from the pre-defined paths
  */
 export class EnvLoader {
+  /**
+   * Create the EnvLoader
+   * @constructor
+   */
   constructor() {
     const env = process.env.NODE_ENV || 'local'
 
@@ -28,6 +32,6 @@ export class EnvLoader {
 }
 
 /**
- * This function returns an instance of the EnvLoader.
+ * Returns an instance of the EnvLoader
  */
 export default new EnvLoader()
