@@ -3,6 +3,9 @@ import chalk  from 'chalk'
 
 let seqInstance
 
+/**
+ * This helper class is responsible for establishing database connections.
+ */
 export class Database {
     constructor() {
         if (process.env.SEQ_DATABASE && 
@@ -22,6 +25,10 @@ export class Database {
         }
     }
 
+    /**
+     * Returns an instance of sequelize object 
+     * @returns {Sequelize}
+     */
     sequelizeInstance() {
         return seqInstance
     }
