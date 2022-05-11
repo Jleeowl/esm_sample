@@ -14,7 +14,7 @@ export class EnvLoader {
     const env = process.env.NODE_ENV || 'local'
 
     const envfile = path.join(process.cwd(), 'src', 'env', '.env.' + env)
-
+    console.log(envfile)
     if (fs.existsSync(envfile)) {
       dotenv.config({
         path: envfile
