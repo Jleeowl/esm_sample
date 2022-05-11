@@ -7,7 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./src/index.mjs",
-    "docs": "rm -rf ./docs && esdoc"
+    "docs": "rm -rf ./docs && esdoc",
+    "migrate:latest": "knex --esm --knexfile knexfile.mjs migrate:latest",
+    "migrate:rollback": "knex --esm --knexfile knexfile.mjs migrate:rollback"
   },
   "author": "",
   "license": "ISC",
