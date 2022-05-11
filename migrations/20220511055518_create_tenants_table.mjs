@@ -7,6 +7,7 @@ export function up(knex) {
     t.increments()
     
     t.string('slug').defaultTo('').index()
+    t.string('db_type').notNullable().defaultTo('pg')
     t.string('db_name').notNullable().defaultTo('')
     t.string('db_host').notNullable().defaultTo('')
     t.string('db_user').notNullable().defaultTo('')

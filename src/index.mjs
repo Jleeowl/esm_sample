@@ -2,6 +2,7 @@ import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 
 import './helpers/env_loader.mjs'
+import { connectAllDb } from './tenantConnManager.mjs'
 
 import chalk  from 'chalk'
 import { join }  from 'path'
@@ -32,7 +33,7 @@ export default (async () => {
   await new Promise(resolve => server.listen(process.env.PORT, resolve))
 
   log()
-  log(chalk.yellow(`Initializing db`))
+  log(chalk.yellow(`Initializing common db`))
   try {
     const seqInstance = db.sequelizeInstance()
     await seqInstance.authenticate()
@@ -40,6 +41,16 @@ export default (async () => {
     log(chalk.green(`- Sequelize ORM (${process.env.DB_NAME}) connection authenticated successfully.`))
   } catch(err) {
     log(chalk.red(`- Sequelize ORM (${process.env.DB_NAME}) connection authentication failed.`))
+  }
+
+  log()
+  log(chalk.yellow(`Initializing tenant db(s)`))
+  try {
+    await connectAllDb()
+
+    log(chalk.green(`- Connection to tenant db(s): successful`))
+  } catch (err) {
+    log(chalk.red(`= Connection to tenant db(s): failed`), err)
   }
 
   log()
