@@ -37,9 +37,9 @@ export default (async () => {
     const seqInstance = db.sequelizeInstance()
     await seqInstance.authenticate()
 
-    log(chalk.green(`- Sequelize ORM (${process.env.SEQ_DATABASE}) connection authenticated successfully.`))
+    log(chalk.green(`- Sequelize ORM (${process.env.DB_NAME}) connection authenticated successfully.`))
   } catch(err) {
-    log(chalk.red(`- Sequelize ORM (${process.env.SEQ_DATABASE}) connection authentication failed.`))
+    log(chalk.red(`- Sequelize ORM (${process.env.DB_NAME}) connection authentication failed.`))
   }
 
   log()
