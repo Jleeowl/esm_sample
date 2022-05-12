@@ -1,6 +1,6 @@
 import { createNamespace } from 'continuation-local-storage'
 
-import { getConnectionBySlug } from '../tenantConnManager.mjs'
+import { getConnectionBySlug } from '../tenant_connection_manager.mjs'
 
 import { v4 as uuidv4 } from 'uuid'
 

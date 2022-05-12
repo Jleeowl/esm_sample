@@ -7,9 +7,9 @@ import compression from 'compression'
 
 import chalk  from 'chalk'
 import { log } from 'console'
-import { connectAllDb } from './tenantConnManager.mjs'
+import { connectAllDb } from './tenant_connection_manager.mjs'
 import db from './database.mjs'
-import * as connectionResolver from './middlewares/connectionResolver.mjs'
+import * as connectionResolver from './middlewares/connection_resolver.mjs'
 
 import router from './routers/apis.mjs'
 
