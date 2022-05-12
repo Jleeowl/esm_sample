@@ -5,9 +5,38 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
 
+import chalk  from 'chalk'
+import { log } from 'console'
+import { connectAllDb } from './tenantConnManager.mjs'
+import db from './database.mjs'
+import * as connectionResolver from './middlewares/connectionResolver.mjs'
+
 import router from './routers/apis.mjs'
 
 const app = express()
+
+app.use(connectionResolver.resolve)
+
+log()
+log(chalk.yellow(`Initializing common db`))
+try {
+  const seqInstance = db.sequelizeInstance()
+  await seqInstance.authenticate()
+
+  log(chalk.green(`- Sequelize ORM (${process.env.DB_NAME}) connection authenticated successfully.`))
+} catch(err) {
+  log(chalk.red(`- Sequelize ORM (${process.env.DB_NAME}) connection authentication failed.`))
+}
+
+log()
+log(chalk.yellow(`Initializing tenant db(s)`))
+try {
+  await connectAllDb()
+
+  log(chalk.green(`- Connection to tenant db(s): successful`))
+} catch (err) {
+  log(chalk.red(`= Connection to tenant db(s): failed`), err)
+}
 
 app.use(compression())
 app.use(cookieParser())

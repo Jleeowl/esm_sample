@@ -24,13 +24,40 @@ export async function connectAllDb() {
         .reduce((prev, next) => {
             return Object.assign({}, prev, next);
         }, {})
-        console.log(connectionMap)
 }
 
 export function getConnectionBySlug(slug) {
     if (connectionMap) {
         return connectionMap[slug]
     }
+}
+
+export async function getConnection() {
+    const conn = ns.get('connection')
+
+    if (!ns) {
+        throw 'Namespace not found.'
+    }
+
+    if (!conn) {
+        /** 
+         * If there is no connection in the pool, 
+         * attempt to refresh the db connection pool. 
+         * A tenant could have been newly added/created
+         * and the connection is not refreshed yet.
+         */ 
+        await connectAllDb()
+
+        /**
+         * If the connection is still unvailable that means there is no
+         * corresponding tenant within the common db.
+         */
+        if (!ns.get('connection')) {
+            throw 'Connection is not set for any tenant database.'
+        }   
+    }
+
+    return conn
 }
 
 const createConnectionConfig = (tenant) => {
