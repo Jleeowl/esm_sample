@@ -1,6 +1,6 @@
 import knex from 'knex'
 
-import db from './database.mjs'
+import db from '../database.mjs'
 
 let connectionMap
 
