@@ -7,15 +7,13 @@ import compression from 'compression'
 
 import chalk  from 'chalk'
 import { log } from 'console'
-import { connectAllDb } from './tenant_connection_manager.mjs'
+import { connectAllDb } from './helpers/tenant_connection_manager.mjs'
 import db from './database.mjs'
 import * as connectionResolver from './middlewares/connection_resolver.mjs'
 
 import router from './routers/apis.mjs'
 
 const app = express()
-
-app.use(connectionResolver.resolve)
 
 log()
 log(chalk.yellow(`Initializing common db`))
@@ -40,6 +38,9 @@ try {
 
 app.use(compression())
 app.use(cookieParser())
+
+// Implementing the connection resolver
+app.use(connectionResolver.resolve)
 
 // Implement your routers here
 app.use('/', router)
