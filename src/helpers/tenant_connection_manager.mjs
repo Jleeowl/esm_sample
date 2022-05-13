@@ -3,8 +3,6 @@ import knex from 'knex'
 
 import db from '../database.mjs'
 
-let connectionMap
-
 export async function connectAllDb() {
     let tenants
 
@@ -16,7 +14,7 @@ export async function connectAllDb() {
         return
     }
     
-    connectionMap = tenants
+    return tenants
         .map(tenant => {
             return {
                 [tenant.slug]: knex(createConnectionConfig(tenant))
@@ -27,7 +25,9 @@ export async function connectAllDb() {
         }, {})
 }
 
-export function getConnectionBySlug(slug) {
+export async function getConnectionBySlug(slug) {
+    const connectionMap = await connectAllDb()
+
     if (connectionMap) {
         return connectionMap[slug]
     }
@@ -35,7 +35,7 @@ export function getConnectionBySlug(slug) {
 
 export async function getConnection(namespace) {
     const ns = getNamespace(namespace)
-    const conn = ns.get('connection')
+    let conn = ns.get('connection')
 
     if (!ns) {
         throw 'Namespace not found.'
@@ -49,17 +49,21 @@ export async function getConnection(namespace) {
          * and the connection is not refreshed yet.
          */ 
         await connectAllDb()
+        conn = ns.get('connection')
+        
 
         /**
          * If the connection is still unvailable that means there is no
          * corresponding tenant within the common db.
          */
-        if (!ns.get('connection')) {
+        if (!conn) {
             throw 'Connection is not set for any tenant database.'
-        }   
+        } else {
+            return conn
+        }
+    } else {
+        return conn
     }
-
-    return conn
 }
 
 const createConnectionConfig = (tenant) => {

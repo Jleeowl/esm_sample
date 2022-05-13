@@ -29,8 +29,6 @@ try {
 log()
 log(chalk.yellow(`Initializing tenant db(s)`))
 try {
-  await connectAllDb()
-
   log(chalk.green(`- Connection to tenant db(s): successful`))
 } catch (err) {
   log(chalk.red(`= Connection to tenant db(s): failed`), err)
