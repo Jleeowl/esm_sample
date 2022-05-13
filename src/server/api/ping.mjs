@@ -34,11 +34,11 @@ class Ping {
     router.get('/', async (req, res, next) => {
       const conn = await getConnection(req.namespace)
       const tenants = await conn.select('*').from('tenants')
-      console.log(tenants)
       
       res.json({
         namespace: req.namespace,
-        data: 'pong'
+        data: 'pong',
+        tenants
       })
     })
 
