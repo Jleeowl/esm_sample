@@ -2,6 +2,8 @@ import express from 'express'
 import db from '../../database.mjs'
 import { getNamespace } from 'continuation-local-storage'
 
+import { getConnection } from '../../helpers/tenant_connection_manager.mjs'
+
 /**
  * Express Router to mount ping related functions
  * @constant
@@ -30,8 +32,10 @@ class Ping {
      * @param {callback} middleware - Express middleware.
      */
     router.get('/', async (req, res, next) => {
-      const ns = getNamespace(req.namespace)
-
+      const conn = await getConnection(req.namespace)
+      const tenants = await conn.select('*').from('tenants')
+      console.log(tenants)
+      
       res.json({
         namespace: req.namespace,
         data: 'pong'
