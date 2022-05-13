@@ -1,3 +1,4 @@
+import { getNamespace } from 'continuation-local-storage'
 import knex from 'knex'
 
 import db from '../database.mjs'
@@ -32,7 +33,8 @@ export function getConnectionBySlug(slug) {
     }
 }
 
-export async function getConnection() {
+export async function getConnection(namespace) {
+    const ns = getNamespace(namespace)
     const conn = ns.get('connection')
 
     if (!ns) {
